@@ -39,7 +39,7 @@ mongoose
 
 app.post('/api/signup', async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { first_name, last_name, email, password } = req.body;
 
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
@@ -60,6 +60,7 @@ app.post('/api/signup', async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '1d' }
     );
+
     res.status(201).json({ message: 'User registered successfully', token });
   } catch (error) {
     console.error(error);
